@@ -1,2 +1,2 @@
 # Portfolio
-My BA &amp; consulting AI tool portfolio
+My BA &amp; Consulting AI tool portfolio
