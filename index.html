@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fara · BA & AI Tooling Portfolio</title>
+<title>Farhana Azher · AI Tooling Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -610,43 +610,222 @@
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── RESPONSIVE ──────────────────────────────────────────────── */
+  /* ── HAMBURGER BUTTON (mobile only) ─────────────────────────── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 300;
+    flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE DRAWER ───────────────────────────────────────────── */
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,15,0.97);
+    z-index: 250;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .mobile-drawer.open { display: flex; }
+  .mobile-drawer a {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .mobile-drawer a:hover { color: var(--teal); }
+  .mobile-drawer .drawer-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 28px;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  /* ── BACK TO TOP ─────────────────────────────────────────────── */
+  .back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 24px;
+    z-index: 150;
+    width: 44px;
+    height: 44px;
+    background: var(--teal);
+    color: #0A0A0F;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(78,205,196,0.35);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .back-to-top:hover { opacity: 0.85; transform: translateY(-2px); }
+  .back-to-top.visible { display: flex; }
+
+  /* ── RESPONSIVE: TABLET (≤1024px) ───────────────────────────── */
   @media (max-width: 1024px) {
     .why-inner { grid-template-columns: 1fr; gap: 36px; }
   }
 
-  @media (max-width: 960px) {
-    nav { padding: 16px 24px; }
-    nav ul { gap: 18px; }
-    .hero { padding: 100px 24px 64px; }
-    .scroll-hint { left: 24px; }
-    .why-section { padding: 56px 24px; }
-    .why-grid { grid-template-columns: 1fr; }
-    .about-strip { padding: 40px 24px; }
-    .about-grid { grid-template-columns: 1fr; gap: 28px; }
-    .ux-banner { margin: 36px 24px 0; padding: 24px; }
-    section { padding: 56px 24px 72px; }
-    .tool-header { padding: 24px; }
+  /* ── RESPONSIVE: MOBILE (≤768px) ────────────────────────────── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+    .nav-hamburger { display: flex; }
+
+    /* Hero */
+    .hero {
+      padding: 100px 20px 60px;
+      min-height: auto;
+      padding-bottom: 80px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 7vw, 40px);
+      line-height: 1.2;
+    }
+    .hero-desc { font-size: 15px; line-height: 1.7; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.1em; flex-wrap: wrap; }
+    .hero-tags { gap: 8px; }
+    .tag { font-size: 11px; padding: 5px 11px; }
+    .scroll-hint { display: none; }
+
+    /* Why section */
+    .why-section { padding: 48px 20px; }
+    .why-inner { grid-template-columns: 1fr; gap: 28px; }
+    .why-grid { grid-template-columns: 1fr; gap: 14px; }
+    .why-card { padding: 22px 20px; }
+    .why-num { font-size: 22px; }
+
+    /* Stats strip */
+    .about-strip { padding: 36px 20px; }
+    .about-grid { grid-template-columns: 1fr; gap: 24px; }
+    .about-item .num { font-size: 32px; }
+
+    /* UX banner */
+    .ux-banner {
+      margin: 28px 20px 0;
+      padding: 20px;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Sections */
+    section { padding: 48px 20px 64px; }
+    .section-title { font-size: 28px; }
+    .section-sub { font-size: 14px; margin-bottom: 36px; }
+
+    /* Skills grid — 1 column on mobile */
+    .skills-grid { grid-template-columns: 1fr; }
+    .skill-cell { padding: 24px 20px; }
+
+    /* Tool cases — mobile card treatment */
+    .tool-case { border-radius: 12px; margin-bottom: 32px; }
+    .tool-header {
+      padding: 20px;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .tool-name { font-size: 20px; }
+    .tool-tagline { font-size: 13px; }
+    .tool-badges { gap: 6px; }
+    .badge { font-size: 10px; padding: 4px 10px; }
+
+    /* Galleries — all single column on mobile */
     .tool-gallery { grid-template-columns: 1fr; }
-    .tool-gallery .gallery-img { border-right: none; border-bottom: 1px solid var(--border); }
+    .tool-gallery .gallery-img {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
     .tool-gallery-3 { grid-template-columns: 1fr; }
-    .tool-gallery-3 .gallery-img { border-right: none; border-bottom: 1px solid var(--border); }
-    .tool-body { grid-template-columns: 1fr; }
-    .tool-col { border-right: none; border-bottom: 1px solid var(--border); padding: 24px; }
-    .tool-col:last-child { border-bottom: none; }
-    .gallery-wide img { height: 220px; }
+    .tool-gallery-3 .gallery-img {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .tool-gallery.single .gallery-img { border-bottom: none; }
+    .gallery-wide img { height: 200px; }
     .gallery-img img { height: 220px; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .coming-soon { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
-    footer { padding: 36px 24px; }
-    .divider { margin: 0 24px; }
+
+    /* Tool body — stacked, card-like */
+    .tool-body { grid-template-columns: 1fr; }
+    .tool-col {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 20px;
+    }
+    .tool-col:last-child { border-bottom: none; }
+    .col-label { font-size: 9px; letter-spacing: 0.14em; margin-bottom: 10px; }
+    .col-text { font-size: 13px; }
+    .col-list li { font-size: 12px; }
+
+    /* Coming soon */
+    .coming-soon {
+      padding: 28px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      margin-top: 32px;
+    }
+    .cs-text h3 { font-size: 20px; }
+    .cs-text p { font-size: 13px; }
+
+    /* Divider */
+    .divider { margin: 0 20px; }
+
+    /* Footer */
+    footer {
+      padding: 32px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .footer-links { flex-direction: column; gap: 12px; }
+    .footer-links a { font-size: 14px; }
   }
 
-  @media (max-width: 560px) {
-    .skills-grid { grid-template-columns: 1fr; }
-    nav ul { display: none; }
-    .hero h1 { font-size: 38px; }
-    .hero-desc { font-size: 15px; }
+  /* ── RESPONSIVE: SMALL PHONES (≤380px) ──────────────────────── */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 26px; }
+    .hero-eyebrow { font-size: 9px; }
+    .why-card { padding: 18px 16px; }
+    .tool-header { padding: 16px; }
+    .tool-col { padding: 16px; }
+    section { padding: 40px 16px 56px; }
   }
 </style>
 </head>
@@ -661,7 +840,22 @@
     <li><a href="#tools">AI Tools</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button>
+  <a href="#skills" class="drawer-link">Expertise</a>
+  <a href="#why" class="drawer-link">Background</a>
+  <a href="#tools" class="drawer-link">AI Tools</a>
+  <a href="#contact" class="drawer-link">Contact</a>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
 <!-- ══════════════════════════════════════════════════════════ HERO -->
 <div class="hero">
@@ -1020,7 +1214,6 @@
     }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
-    // Fallback for older browsers
     revealEls.forEach(el => el.classList.add('visible'));
   }
 
@@ -1037,6 +1230,45 @@
       a.style.color = target === current ? 'var(--text)' : '';
     });
   }, { passive: true });
+
+  /* ── Hamburger menu ──────────────────────────────────────────── */
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerClose  = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    mobileDrawer.classList.add('open');
+    hamburgerBtn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    mobileDrawer.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+
+  // Close drawer when any nav link is tapped
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // Close drawer on backdrop tap (outside links)
+  mobileDrawer.addEventListener('click', e => {
+    if (e.target === mobileDrawer) closeDrawer();
+  });
+
+  /* ── Back to top ─────────────────────────────────────────────── */
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) backToTop.classList.add('visible');
+    else backToTop.classList.remove('visible');
+  }, { passive: true });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 </body>
