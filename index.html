@@ -610,6 +610,87 @@
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
+  /* ── CLIENT TICKER ───────────────────────────────────────────── */
+  .ticker-section {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 0;
+    overflow: hidden;
+  }
+  .ticker-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 28px;
+  }
+  .ticker-track-wrapper {
+    overflow: hidden;
+    position: relative;
+    /* fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  }
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    animation: tickerScroll 30s linear infinite;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 48px;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .ticker-item:last-child { border-right: none; }
+  .ticker-logo {
+    width: auto;
+    height: 36px;
+    max-width: 90px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.65;
+    transition: opacity 0.3s, filter 0.3s;
+  }
+  .ticker-item:hover .ticker-logo {
+    opacity: 1;
+    filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(140deg);
+  }
+  .ticker-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .ticker-item:hover .ticker-name { color: var(--teal); }
+
+  @keyframes tickerScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Mobile ticker */
+  @media (max-width: 768px) {
+    .ticker-section { padding: 28px 0; }
+    .ticker-logo { height: 28px; max-width: 70px; }
+    .ticker-item { padding: 0 32px; gap: 10px; }
+    .ticker-name { font-size: 11px; }
+    .ticker-track { animation-duration: 22s; }
+  }
+
   /* ── HAMBURGER BUTTON (mobile only) ─────────────────────────── */
   .nav-hamburger {
     display: none;
@@ -878,6 +959,89 @@
     <a href="#tools" class="hero-cta">See the tools ↓</a>
   </div>
   <div class="scroll-hint">Scroll to explore</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ TICKER -->
+<div class="ticker-section">
+  <div class="ticker-label">Experience across</div>
+  <div class="ticker-track-wrapper">
+    <div class="ticker-track">
+      <!-- First set -->
+      <div class="ticker-item">
+        <img src="kpmg_logo.jpg" alt="KPMG" class="ticker-logo">
+        <span class="ticker-name">KPMG</span>
+      </div>
+      <div class="ticker-item">
+        <img src="standardlifeplc_logo.jpg" alt="Standard Life" class="ticker-logo">
+        <span class="ticker-name">Standard Life</span>
+      </div>
+      <div class="ticker-item">
+        <img src="london_stock_exchange_group_logo.jpg" alt="LSEG" class="ticker-logo">
+        <span class="ticker-name">LSEG</span>
+      </div>
+      <div class="ticker-item">
+        <img src="fidelity.png" alt="Fidelity International" class="ticker-logo">
+        <span class="ticker-name">Fidelity International</span>
+      </div>
+      <div class="ticker-item">
+        <img src="Aptia_logo.png" alt="Aptia" class="ticker-logo">
+        <span class="ticker-name">Aptia</span>
+      </div>
+      <div class="ticker-item">
+        <img src="nhs.jpg" alt="NHS" class="ticker-logo">
+        <span class="ticker-name">NHS</span>
+      </div>
+      <div class="ticker-item">
+        <img src="national_grid.jpg" alt="National Grid" class="ticker-logo">
+        <span class="ticker-name">National Grid</span>
+      </div>
+      <div class="ticker-item">
+        <img src="sales-i.jpg" alt="Sales-i" class="ticker-logo">
+        <span class="ticker-name">Sales-i</span>
+      </div>
+      <div class="ticker-item">
+        <img src="finning.jpg" alt="Finning" class="ticker-logo">
+        <span class="ticker-name">Finning</span>
+      </div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="ticker-item">
+        <img src="kpmg_logo.jpg" alt="KPMG" class="ticker-logo">
+        <span class="ticker-name">KPMG</span>
+      </div>
+      <div class="ticker-item">
+        <img src="standardlifeplc_logo.jpg" alt="Standard Life" class="ticker-logo">
+        <span class="ticker-name">Standard Life</span>
+      </div>
+      <div class="ticker-item">
+        <img src="london_stock_exchange_group_logo.jpg" alt="LSEG" class="ticker-logo">
+        <span class="ticker-name">LSEG</span>
+      </div>
+      <div class="ticker-item">
+        <img src="fidelity.png" alt="Fidelity International" class="ticker-logo">
+        <span class="ticker-name">Fidelity International</span>
+      </div>
+      <div class="ticker-item">
+        <img src="Aptia_logo.png" alt="Aptia" class="ticker-logo">
+        <span class="ticker-name">Aptia</span>
+      </div>
+      <div class="ticker-item">
+        <img src="nhs.jpg" alt="NHS" class="ticker-logo">
+        <span class="ticker-name">NHS</span>
+      </div>
+      <div class="ticker-item">
+        <img src="national_grid.jpg" alt="National Grid" class="ticker-logo">
+        <span class="ticker-name">National Grid</span>
+      </div>
+      <div class="ticker-item">
+        <img src="sales-i.jpg" alt="Sales-i" class="ticker-logo">
+        <span class="ticker-name">Sales-i</span>
+      </div>
+      <div class="ticker-item">
+        <img src="finning.jpg" alt="Finning" class="ticker-logo">
+        <span class="ticker-name">Finning</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════ SKILLS -->
