@@ -439,6 +439,8 @@
     overflow: hidden;
     border-right: 1px solid var(--border);
     background: #0D0D14;
+    display: flex;
+    flex-direction: column;
   }
   .gallery-img:last-child { border-right: none; }
   .gallery-img img {
@@ -449,16 +451,17 @@
     display: block;
     filter: brightness(0.95);
     transition: transform 0.5s ease, filter 0.3s ease;
+    flex-shrink: 0;
   }
   .gallery-img:hover img { transform: scale(1.02); filter: brightness(1); }
   .gallery-img .cap {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
     padding: 10px 16px;
-    background: linear-gradient(to top, rgba(10,10,15,0.92), transparent);
+    background: var(--card);
+    border-top: 1px solid var(--border);
     font-size: 11px;
     color: var(--muted);
     letter-spacing: 0.06em;
+    flex-shrink: 0;
   }
 
   /* Gallery — three-column */
@@ -469,6 +472,7 @@
   }
   .tool-gallery-3 .gallery-img { border-right: 1px solid var(--border); }
   .tool-gallery-3 .gallery-img:last-child { border-right: none; }
+  .tool-gallery-3 .gallery-img img { height: 240px; }
 
   /* Tool body — 3-col narrative */
   .tool-body { display: grid; grid-template-columns: 1fr 1fr 1fr; }
@@ -539,30 +543,59 @@
     flex-shrink: 0;
   }
 
-  /* ── SKILLS ──────────────────────────────────────────────────── */
+  /* ── SKILLS (icon + title only) ─────────────────────────────── */
   .skills-section {
     background: var(--surface);
     border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 1px;
-    background: var(--border);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
     max-width: 1100px;
+    background: var(--border);
   }
   .skill-cell {
     background: var(--card);
-    padding: 32px 28px;
-    transition: background 0.2s;
+    padding: 32px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: default;
   }
-  .skill-cell:hover { background: #1C1C27; }
-  .skill-cell .icon { font-size: 22px; margin-bottom: 14px; }
-  .skill-cell h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-  .skill-cell p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .skill-cell:hover {
+    background: #1E1E2A;
+    transform: translateY(-2px);
+  }
+  .skill-cell .icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+  .skill-cell h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+  /* Mobile: 2 columns */
+  @media (max-width: 768px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .skill-cell { padding: 24px 16px; gap: 10px; }
+    .skill-cell .icon { font-size: 26px; }
+    .skill-cell h4 { font-size: 12px; }
+  }
+  @media (max-width: 380px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 
   /* ── DIVIDER ─────────────────────────────────────────────────── */
   .divider {
@@ -656,8 +689,8 @@
   .ticker-item:last-child { border-right: none; }
   .ticker-logo {
     width: auto;
-    height: 36px;
-    max-width: 100px;
+    height: 48px;
+    max-width: 120px;
     object-fit: contain;
     border-radius: 4px;
   }
@@ -910,9 +943,9 @@
 <nav>
   <a href="https://www.linkedin.com/in/farhanaazher/" target="_blank" class="nav-logo">Farhana <span>Azher</span></a>
   <ul>
-    <li><a href="#skills">Expertise</a></li>
     <li><a href="#why">Background</a></li>
     <li><a href="#tools">AI Tools</a></li>
+    <li><a href="#skills">Expertise</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
@@ -923,9 +956,9 @@
 <!-- Mobile drawer -->
 <div class="mobile-drawer" id="mobileDrawer">
   <button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button>
-  <a href="#skills" class="drawer-link">Expertise</a>
   <a href="#why" class="drawer-link">Background</a>
   <a href="#tools" class="drawer-link">AI Tools</a>
+  <a href="#skills" class="drawer-link">Expertise</a>
   <a href="#contact" class="drawer-link">Contact</a>
 </div>
 
@@ -938,7 +971,7 @@
     <div class="hero-eyebrow">Principal Consultant · AI Product Manager · Lead Business Analyst · AI/Automation Champion</div>
     <h1>Building <em>AI-powered</em> tools that reduce manual effort and create space for deeper problem-solving.</h1>
     <p class="hero-desc">
-      I bridge the gap between business strategy and technical delivery — working across <strong>Product, Analysis and Consulting</strong> disciplines to turn complex problems into clear, actionable outcomes. With a career spanning global consulting and in-house roles across <strong>Financial Services, Legal, SaaS and Energy</strong>, I am now focused on driving AI and Digital Transformation.
+      I bridge the gap between business strategy and technical delivery, working across <strong>Product, Analysis and Consulting</strong> disciplines to turn complex problems into clear, actionable outcomes. With a career spanning global consulting and in-house roles across <strong>Financial Services, Legal, SaaS and Energy</strong>, I am now focused on driving AI and Digital Transformation.
     </p>
     <div class="hero-tags">
       <span class="tag highlight">Generative AI Adoption</span>
@@ -1038,58 +1071,6 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════ SKILLS -->
-<section id="skills" class="skills-section">
-  <div class="section-label">Expertise</div>
-  <h2 class="section-title">What I Bring</h2>
-  <p class="section-sub">The combination of domain depth, delivery experience, and AI literacy that makes these tools genuinely useful — not just technically interesting.</p>
-
-  <div class="skills-grid reveal">
-    <div class="skill-cell">
-      <div class="icon">📦</div>
-      <h4>Product Management</h4>
-      <p>Product ownership, backlog management, user story writing, stakeholder management and full SDLC delivery.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">🎯</div>
-      <h4>Consulting Delivery</h4>
-      <p>Big 4 background (KPMG). Programme delivery, workshop facilitation and senior/C-Suite stakeholder engagement.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">📐</div>
-      <h4>Business Analysis</h4>
-      <p>BRD/FRD authoring, requirements elicitation, MoSCoW prioritisation, gap analysis, process re-engineering and workshop facilitation.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">🏦</div>
-      <h4>Financial Services</h4>
-      <p>Pensions, Wealth and Asset Management, capital markets, insurance, underwriting and audit. FCA/PRA regulatory context across FS transformation programmes.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">🤖</div>
-      <h4>AI &amp; Automation</h4>
-      <p>Prompt engineering, AI-assisted delivery, workflow automation and building AI tools that solve real consulting problems.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">🔍</div>
-      <h4>Problem Diagnosis &amp; Root Cause Analysis</h4>
-      <p>Identifying root causes, not just symptoms. Structured analysis, gap identification and turning ambiguous problems into clear delivery plans.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">✦</div>
-      <h4>Human-Centred Design</h4>
-      <p>HCD methodology from KPMG applied to every tool and deliverable — intuitive for colleagues and clients, not just the person who built it.</p>
-    </div>
-    <div class="skill-cell">
-      <div class="icon">🌐</div>
-      <h4>Cross-Sector Delivery</h4>
-      <p>FS, Legal, SaaS, Energy and Construction delivery experience — bringing pattern recognition across sectors that specialists in one domain don't have.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <!-- ══════════════════════════════════════════════════════════ WHY -->
 <div id="why" class="why-section reveal">
   <div class="why-inner">
@@ -1101,22 +1082,22 @@
       <div class="why-card">
         <div class="why-num">01</div>
         <h4>Hands-on AI learning</h4>
-        <p>I wanted to go beyond using AI and actually build with it — to deeply understand how LLMs work and how to apply that to real consulting problems. This is my learning made tangible.</p>
+        <p>I wanted to go beyond using AI and actually build with it, to deeply understand how LLMs work and how to apply that to real consulting problems. This is my learning made tangible.</p>
       </div>
       <div class="why-card">
         <div class="why-num">02</div>
         <h4>Tailored to how I actually work</h4>
-        <p>Existing tools have too many features I don't need and miss the things I do — like going straight from a meeting transcript to a structured process map. These are purpose-built for my specific workflows.</p>
+        <p>Existing tools have too many features I don't need and miss the things I do: like going straight from a meeting transcript to a structured process map. These are purpose-built for my specific workflows.</p>
       </div>
       <div class="why-card">
         <div class="why-num">03</div>
         <h4>Creating my own toolkit</h4>
-        <p>Without budget for premium AI tools, I built my own — and in doing so, created something more tailored and efficient than the off-the-shelf alternatives I couldn't access anyway.</p>
+        <p>Without budget for premium AI tools, I built my own, and in doing so, created something more tailored and efficient than the off-the-shelf alternatives I couldn't access anyway.</p>
       </div>
       <div class="why-card">
         <div class="why-num">04</div>
         <h4>Sharing knowledge with the team</h4>
-        <p>A key part of my role is upskilling colleagues. Building visible, usable tools is the most effective way to demonstrate what AI-assisted delivery looks like in practice — and inspire others to build too.</p>
+        <p>A key part of my role is upskilling colleagues. Building visible, usable tools is the most effective way to demonstrate what AI-assisted delivery looks like in practice, and inspire others to build too.</p>
       </div>
     </div>
   </div>
@@ -1128,12 +1109,12 @@
     <div class="about-item">
       <span class="num">11+</span>
       <span class="label">Years Experience</span>
-      <span class="desc">Big 4 background at KPMG. Consulting and in-house delivery across Financial Services, Legal, SaaS and Energy — with a primary focus on Financial Services transformation.</span>
+      <span class="desc">Big 4 background at KPMG. Consulting and in-house delivery across Financial Services, Legal, SaaS and Energy, with a primary focus on Financial Services transformation.</span>
     </div>
     <div class="about-item">
       <span class="num">3</span>
       <span class="label">AI Tools Built &amp; In Use</span>
-      <span class="desc">Each tool solves a real problem from live client delivery — not a proof of concept, but something used in actual engagements.</span>
+      <span class="desc">Each tool solves a real problem from live client delivery: not a proof of concept, but something used in actual engagements.</span>
     </div>
     <div class="about-item">
       <span class="num">Hours</span>
@@ -1148,7 +1129,7 @@
   <div class="ux-icon">✦</div>
   <div>
     <h4>Human-Centred Design Principle</h4>
-    <p>My KPMG background includes human-centred design, and I bring that into everything I build. Each tool is designed not just for my own use — but to be intuitive enough for colleagues and clients to use without training. <strong>Consistent navigation, shared export patterns and familiar interaction flows run across all three tools</strong> — so learning one means you already know the others.</p>
+    <p>My KPMG background includes human-centred design, and I bring that into everything I build. Each tool is designed not just for my own use: intuitive enough for colleagues and clients to use without training. <strong>Consistent navigation, shared export patterns and familiar interaction flows run across all three tools</strong>, so learning one means you already know the others.</p>
   </div>
 </div>
 
@@ -1164,7 +1145,7 @@
       <div>
         <div class="tool-number">Tool 01</div>
         <h3 class="tool-name">Process Map Generator</h3>
-        <p class="tool-tagline">From raw meeting transcript to client-ready process map — in minutes, not days. Designed to replace manual Visio and Miro sessions and work live inside client workshops.</p>
+        <p class="tool-tagline">From raw meeting transcript to client-ready process map, in minutes, not days. Designed to replace manual Visio and Miro sessions and work live inside client workshops.</p>
       </div>
       <div class="tool-badges">
         <span class="badge">BPMN</span>
@@ -1177,18 +1158,18 @@
     <!-- Wide hero: full exported map -->
     <div class="gallery-wide">
       <img src="PS_4.png" alt="Full exported process map showing 5-lane swimlane across Sales, Processing, Underwriting, Funding and Asset Management">
-      <div class="gallery-cap">Full exported process map — Sales → Processing → Underwriting → Funding → Asset Mgmt &nbsp;·&nbsp; 12 steps &nbsp;·&nbsp; 5 actors</div>
+      <div class="gallery-cap">Full exported process map: Sales → Processing → Underwriting → Funding → Asset Mgmt &nbsp;·&nbsp; 12 steps &nbsp;·&nbsp; 5 actors</div>
     </div>
 
     <!-- Two-col: interface + export -->
     <div class="tool-gallery">
       <div class="gallery-img">
         <img src="PS_1.png" alt="Process Map Generator main interface showing live swimlane canvas and saved maps history panel">
-        <div class="cap">Main interface — live map canvas with saved maps history</div>
+        <div class="cap">Main interface: live map canvas with saved maps history</div>
       </div>
       <div class="gallery-img">
         <img src="PS_3.png" alt="Export panel showing SVG, PNG, PDF, Mermaid and JSON export options">
-        <div class="cap">Export panel — SVG, PNG, PDF, Mermaid (FigJam/Miro), JSON</div>
+        <div class="cap">Export panel: SVG, PNG, PDF, Mermaid (FigJam/Miro), JSON</div>
       </div>
     </div>
 
@@ -1196,7 +1177,7 @@
       <div class="tool-col">
         <div class="col-label">The Problem</div>
         <p class="col-text">
-          As a BA and Product Manager, <strong>process mapping is constant — and painfully manual.</strong> Every engagement means hours translating workshop notes into Visio or Miro diagrams, then scheduling a second session to review with the client. A two-step process that should be one.
+          As a BA and Product Manager, <strong>process mapping is constant, and painfully manual.</strong> Every engagement means hours translating workshop notes into Visio or Miro diagrams, then scheduling a second session to review with the client. A two-step process that should be one.
         </p>
       </div>
       <div class="tool-col">
@@ -1204,14 +1185,14 @@
         <ul class="col-list">
           <li>Paste raw meeting transcript → Claude structures it as JSON instantly</li>
           <li>Upload or paste JSON → tool auto-generates a correctly shaped, multi-lane process map, which is fully editable</li>
-          <li>Export as SVG, PNG, PDF or Mermaid — plug straight into Figma or Miro for further editing</li>
+          <li>Export as SVG, PNG, PDF or Mermaid, plug straight into Figma or Miro for further editing</li>
           <li>History tab stores all previous maps with full session persistence</li>
         </ul>
       </div>
       <div class="tool-col">
         <div class="col-label">The Impact</div>
         <p class="col-text">
-          <strong>Workshops transformed.</strong> I now produce a draft AS-IS process map live, inside the client session, as the conversation unfolds. Clients see it rendered in real time, give feedback immediately, and we finalise in one session — not two. What used to take a full day of post-workshop effort now takes minutes.
+          <strong>Workshops transformed.</strong> I now produce a draft AS-IS process map live, inside the client session, as the conversation unfolds. Clients see it rendered in real time, give feedback immediately, and we finalise in one session, not two. What used to take a full day of post-workshop effort now takes minutes.
         </p>
       </div>
     </div>
@@ -1223,7 +1204,7 @@
       <div>
         <div class="tool-number">Tool 02</div>
         <h3 class="tool-name">Service Blueprint Studio</h3>
-        <p class="tool-tagline">End-to-end service design across every layer of an organisation — built for C-Suite conversations where the detail matters, but so does the bigger picture.</p>
+        <p class="tool-tagline">End-to-end service design across every layer of an organisation, built for C-Suite conversations where the detail matters, but so does the bigger picture.</p>
       </div>
       <div class="tool-badges">
         <span class="badge">Service Design</span>
@@ -1237,11 +1218,11 @@
     <div class="tool-gallery">
       <div class="gallery-img">
         <img src="SB_1.png" alt="Service Blueprint Studio showing a Financial Services Client blueprint across Underwriting, Funding and Asset Management with actor bubbles, pain points and opportunities">
-        <div class="cap">Financial Services Client — full service blueprint across 5 stages · 14 steps · 3 actors</div>
+        <div class="cap">Financial Services Client: full service blueprint across 5 stages · 14 steps · 3 actors</div>
       </div>
       <div class="gallery-img">
         <img src="SB_2.png" alt="Service Blueprint step editor showing description, stage, actor, tools and ROI and opportunity analysis fields">
-        <div class="cap">Step editor — description, stage, actor, tools used, ROI &amp; opportunity analysis and pain point priority</div>
+        <div class="cap">Step editor: description, stage, actor, tools used, ROI &amp; opportunity analysis and pain point priority</div>
       </div>
     </div>
 
@@ -1249,7 +1230,7 @@
       <div class="tool-col">
         <div class="col-label">The Problem</div>
         <p class="col-text">
-          Detailed process maps are essential for BA work — but C-Suite stakeholders need the <strong>end-to-end picture</strong>, with pain points, automation opportunities and system constraints visible at a glance. Producing that level of analysis traditionally means hours of additional work after the workshop.
+          Detailed process maps are essential for BA work, but C-Suite stakeholders need the <strong>end-to-end picture</strong>, with pain points, automation opportunities and system constraints visible at a glance. Producing that level of analysis traditionally means hours of additional work after the workshop.
         </p>
       </div>
       <div class="tool-col">
@@ -1263,7 +1244,7 @@
       <div class="tool-col">
         <div class="col-label">The Impact</div>
         <p class="col-text">
-          Particularly valuable in <strong>regulated Financial Services environments</strong> where C-Suite stakeholders need operational visibility without the granular process detail. Bridges the gap between BA-level mapping and executive-level communication — in one tool, one session.
+          Particularly valuable in <strong>regulated Financial Services environments</strong> where C-Suite stakeholders need operational visibility without the granular process detail. Bridges the gap between BA-level mapping and executive-level communication: one tool, one session.
         </p>
       </div>
     </div>
@@ -1275,7 +1256,7 @@
       <div>
         <div class="tool-number">Tool 03</div>
         <h3 class="tool-name">AI Knowledge Base</h3>
-        <p class="tool-tagline">A living, searchable library of AI best practices — built to capture and grow everything a team learns from an internal AI upskilling programme I designed and run.</p>
+        <p class="tool-tagline">A living, searchable library of AI best practices, built to capture and grow everything a team learns from an internal AI upskilling programme I designed and run.</p>
       </div>
       <div class="tool-badges">
         <span class="badge">Knowledge Mgmt</span>
@@ -1289,15 +1270,15 @@
     <div class="tool-gallery-3">
       <div class="gallery-img">
         <img src="KB_1.png" alt="AI Knowledge Base main dashboard showing 64 best practices across 8 categories with search and filter controls">
-        <div class="cap">Main dashboard — 64 practices, 8 categories, search &amp; filter</div>
+        <div class="cap">Main dashboard: 64 practices, 8 categories, search &amp; filter</div>
       </div>
       <div class="gallery-img">
         <img src="KB_4.png" alt="Category filter dropdown open showing categories including Prompting, Workflow, Collaboration and AI Mindset">
-        <div class="cap">8 categories — browse or filter by topic</div>
+        <div class="cap">8 categories: browse or filter by topic</div>
       </div>
       <div class="gallery-img">
         <img src="KB_5.png" alt="Live search results for LLM showing 3 of 64 filtered best practice cards">
-        <div class="cap">Live search — instant filtered results across all entries</div>
+        <div class="cap">Live search: instant filtered results across all entries</div>
       </div>
     </div>
 
@@ -1305,11 +1286,11 @@
     <div class="tool-gallery">
       <div class="gallery-img">
         <img src="KB_3.png" alt="Add Best Practice form with fields for title, description, category, contributor name, session source and tags">
-        <div class="cap">Add a single insight — title, description, category, tags, contributor</div>
+        <div class="cap">Add a single insight: title, description, category, tags, contributor</div>
       </div>
       <div class="gallery-img">
         <img src="KB_2.png" alt="Extract from Transcript modal showing 3-step upload flow: upload, extract, review">
-        <div class="cap">Extract from transcript — upload a Teams export, AI pulls the insights automatically</div>
+        <div class="cap">Extract from transcript: upload a Teams export, AI pulls the insights automatically</div>
       </div>
     </div>
 
@@ -1317,14 +1298,14 @@
       <div class="tool-col">
         <div class="col-label">The Problem</div>
         <p class="col-text">
-          I designed and run an <strong>internal AI upskilling programme</strong> at Transform Together — training sessions, demos, and team-led sharing of how we're each using AI in delivery. All that knowledge was being shared verbally and then lost. There was no structured way to capture it, search it, or build on it over time.
+          I designed and run an <strong>internal AI upskilling programme</strong> at Transform Together: training sessions, demos, and team-led sharing of how we're each using AI in delivery. All that knowledge was being shared verbally and then lost. There was no structured way to capture it, search it, or build on it over time.
         </p>
       </div>
       <div class="tool-col">
         <div class="col-label">What It Does</div>
         <ul class="col-list">
           <li>Hosts all best practices and lessons learned from AI training sessions in a searchable format</li>
-          <li>Full-text search and category/session filters — find exactly what you need instantly</li>
+          <li>Full-text search and category/session filters, to find exactly what you need instantly</li>
           <li>Team members add insights manually or upload a meeting transcript for AI extraction</li>
           <li>Star ratings and bookmarking so the most useful practices naturally surface</li>
         </ul>
@@ -1332,7 +1313,7 @@
       <div class="tool-col">
         <div class="col-label">The Impact</div>
         <p class="col-text">
-          Transformed a series of training sessions into a <strong>living, growing team knowledge asset.</strong> Colleagues self-serve answers on how to apply AI in client contexts. The programme and tool together accelerate team AI capability — and demonstrate what responsible, practical AI adoption looks like in a consulting environment.
+          Transformed a series of training sessions into a <strong>living, growing team knowledge asset.</strong> Colleagues self-serve answers on how to apply AI in client contexts. The programme and tool together accelerate team AI capability, and demonstrate what responsible, practical AI adoption looks like in a consulting environment.
         </p>
       </div>
     </div>
@@ -1342,9 +1323,49 @@
   <div class="coming-soon reveal">
     <div class="cs-text">
       <h3>More tools in progress</h3>
-      <p>Currently building: a requirements prioritisation tool (MoSCoW / RICE scoring) and an interactive stakeholder mapping canvas. Both follow the same design principle — reduce manual BA effort so more time is spent with clients, not creating documents.</p>
+      <p>Currently building: a requirements prioritisation tool (MoSCoW / RICE scoring) and an interactive stakeholder mapping canvas. Both follow the same design principle: reduce manual BA effort so more time is spent with clients, not creating documents.</p>
     </div>
     <div class="cs-pill">Coming soon</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">What I Bring</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-cell">
+      <div class="icon">📦</div>
+      <h4>Product Management</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">🎯</div>
+      <h4>Consulting Delivery</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">📐</div>
+      <h4>Business Analysis</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">🏦</div>
+      <h4>Financial Services</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">🤖</div>
+      <h4>AI &amp; Automation</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">🔍</div>
+      <h4>Problem Diagnosis &amp; Root Cause Analysis</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">✦</div>
+      <h4>Human-Centred Design</h4>
+    </div>
+    <div class="skill-cell">
+      <div class="icon">🌐</div>
+      <h4>Cross-Sector Delivery</h4>
+    </div>
   </div>
 </section>
 
